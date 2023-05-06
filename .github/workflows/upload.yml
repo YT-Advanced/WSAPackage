@@ -27,5 +27,5 @@ jobs:
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
-          files: dloa/*.msixbundle
+          files: dloa/*.Msixbundle
           tag_name: ${{ inputs.tag }}
