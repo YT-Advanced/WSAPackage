@@ -22,8 +22,8 @@ jobs:
         run: |
           sudo apt-get update; sudo apt-get install -y aria2
           aria2c -d dloa '${{ inputs.upl }}'
-          echo "SHA-256=$(sha256sum dloa/*.msixbundle)"
-          echo "SHA-1=$(sha1sum dloa/*.msixbundle)"
+          echo "SHA-256=$(sha256sum dloa/*.Msixbundle)"
+          echo "SHA-1=$(sha1sum dloa/*.Msixbundle)"
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
