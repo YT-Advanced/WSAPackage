@@ -1,0 +1,31 @@
+name: Upload WSA
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'MSIX DL URL'
+        required: true
+        type: string
+      wsa_ver:
+        description: 'WSA version'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y aria2
+          aria2c -d dloa '${{ inputs.url }}'
+          echo "SHA-256=$(sha256sum dloa/*.Msixbundle)"
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dloa/*.Msixbundle
+          tag_name: v${{ inputs.wsa_ver }}
